@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { Media } from '@/types/media';
+import { MetaData as MetaData } from '@/types/media';
 
 interface SearchResultState {
-  searchResult: Media[];
-  setSearchResult: (results: Media[]) => void;
+  searchResult: MetaData[];
+  setSearchResult: (results: MetaData[]) => void;
 }
 
 const useSearchStore = create<SearchResultState>((set) => ({

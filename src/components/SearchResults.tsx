@@ -3,20 +3,19 @@ import React from 'react';
 import { cn } from '@/lib/utils/cn';
 import useSearchStore from '@/hooks/store';
 import Link from 'next/link';
+import Card from './ui/Card';
 
 
 export default function SearchResults({ className }: { className?: string, SearchResults: string[] }) {
   const searchResults = useSearchStore((state) => state.searchResult)
   return (
-    <div className={cn("text-white mt-12", className)}>
-
+    <div className={cn("mt-10 flex flex-wrap items-center justify-center gap-8", className)}>
       {searchResults.map((result, index) => (
-        <div key={index} className='flex flex-row space-x-2'>
-          <Link href="/show">
-            <div className='text-base'>{result.title}</div>
-          </Link>
+        <div key={index}>
+          <Card media={result} />
         </div>
       ))
+
       }
     </div >
   );
