@@ -14,10 +14,10 @@ export default function NavbarTop({ className }: { className?: string }) {
     { name: "User", href: "/user" },]
 
   return (
-    <div className={cn("flex flex-row w-full justify-center items-center", className)}>
+    <div className={cn("flex flex-row w-full justify-center items-center ", className)}>
       <div className='hidden md:block'>
         <nav className="flex-row flex" >
-          <ul className='text-gray-100 flex flex-row space-x-2'>
+          <ul className='text-gray-100 flex flex-row space-x-8'>
             {
               links.map((link, index) => (
                 <li key={index}>
