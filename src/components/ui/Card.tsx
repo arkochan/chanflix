@@ -1,5 +1,6 @@
 import React from 'react';
 import { MetaData } from '@/types/media';
+import Link from 'next/link';
 
 interface CardProps {
   media: MetaData;
@@ -7,7 +8,7 @@ interface CardProps {
 
 function Card({ media }: CardProps) {
   return (
-    <div className="max-w-xs rounded overflow-hidden shadow-lg">
+    <Link href={`/media/${media.id}`} className="max-w-xs rounded overflow-hidden shadow-lg">
       <img className="w-full" src={"https://image.tmdb.org/t/p/w600_and_h900_bestv2" + media.poster_path} alt={media.title} />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{media.title}</div>
@@ -22,7 +23,7 @@ function Card({ media }: CardProps) {
           </span>
         ))}
       </div>
-    </div>
+    </Link>
   );
 };
 
