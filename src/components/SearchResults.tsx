@@ -10,7 +10,7 @@ export default function SearchResults({ className }: { className?: string, Searc
   const searchResults = useSearchStore((state) => state.searchResult)
   return (
     <div className={cn("mt-10 flex flex-wrap items-center justify-center gap-8", className)}>
-      {searchResults.map((result, index) => (
+      {searchResults && searchResults.results.length > 0 && searchResults.results.map((result, index) => (
         <div key={index}>
           <Card media={result} />
         </div>

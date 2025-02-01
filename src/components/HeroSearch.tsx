@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { cn } from '@/lib/utils/cn';
 import { PlaceholdersAndVanishInput } from './ui/placeholders-and-vanish-input';
 import useSearchStore from '@/hooks/store';
-import { MetaData } from '@/types/media';
-import data from '@/lib/data.json';
+import { ResultMetaData } from '@/types/ResultMetaData';
+import { getSearchResult } from '@/lib/db';
 
 export default function HeroSearch({ className }: { className?: string }) {
 
@@ -14,13 +14,14 @@ export default function HeroSearch({ className }: { className?: string }) {
   // const searchResults = useSearchStore((state) => state.searchResult)
   const setSearchResults = useSearchStore((state) => state.setSearchResult)
 
-  const dt = data.results as MetaData[]
+  // HACK: 
+  const searchResult = getSearchResult(0);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setQueryString(e.target.value);
   }
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    setSearchResults(dt)
+    setSearchResults(searchResult)
   }
 
   return (
