@@ -6,7 +6,7 @@ export default async function Page({
   const slug = (await params).m_id
   return (
     < div className="text-white" >
-      <h1>Media Page</h1>
+      <h1>Tv Detail Page</h1>
       <p>Media ID: {slug}</p>
     </div >
   )
