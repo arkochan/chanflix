@@ -1,6 +1,7 @@
 import { getMovieDetail, getTvDetail } from "@/lib/db";
 import { MovieDetail } from "@/types/MovieDetail";
 import { TVDetail } from "@/types/TVDetail";
+import Link from "next/link";
 
 export default async function Page({
   params,
@@ -76,7 +77,27 @@ export default async function Page({
             {/* </div> */}
           </div>
         </div>
-      </div>
+        <div className="text-xl text-white"> Seasons </div>
+        {mediaDetail.seasons.map((season) => (
+          season.name !== "Specials" &&
+
+          <div key={season.id} className="text-white flex flex-row p-4 border-b border-gray-400">
+            <div>
+              <Link className="" href={`/detail/season/${season.id}`} >
+                <div className="w-32 h-48 overflow-hidden">
+                  <img src={imageBasePath + "/" + season.poster_path} alt={season.name} className="w-full h-full object-cover object-center" />
+                </div>
+              </Link>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold">{season.name}</h2>
+              <p>{season.overview}</p>
+            </div>
+          </div>
+        ))
+        }
+
+      </div >
     );
   }
 }
