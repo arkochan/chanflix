@@ -1,14 +1,82 @@
+import { getMovieDetail, getTvDetail } from "@/lib/db";
+import { MovieDetail } from "@/types/MovieDetail";
+import { TVDetail } from "@/types/TVDetail";
+
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string[] }>
+  params: Promise<{ slug: string[] }>;
 }) {
-  const [mediaType, mediaId] = (await params).slug
-  console.log(mediaType, mediaId)
-  return (
-    < div className="text-white" >
-      <h1>{mediaType.toUpperCase()} Detail Page</h1>
-      <p>Media ID: {mediaId}</p>
-    </div >
-  )
+  const imageBasePath = "https://image.tmdb.org/t/p/w500";
+  const [mediaType, mediaId] = (await params).slug;
+  console.log(mediaType, mediaId);
+  if (mediaType === "movie") {
+    const mediaDetail: MovieDetail = getMovieDetail(parseInt(mediaId));
+
+    if (!mediaDetail) {
+      return <div>Media not found</div>;
+    }
+    return (
+      <div className="container mx-auto p-4">
+        <div className="max-w-4xl mx-auto ">
+          <img
+            className="aspect-auto object-cover"
+            src={imageBasePath + "/" + mediaDetail.poster_path}
+            alt={mediaDetail.title}
+          />
+          <div className="p-6">
+            <h1 className="text-3xl font-bold mb-2">{mediaDetail.title}</h1> <p className="text-gray-700 text-base line-clamp-3 overflow-hidden">
+              {mediaDetail.overview}
+            </p>
+            {/* <div className="mt-4"> */}
+            {/*   <span className="font-semibold">Release Date:</span>{" "} */}
+            {/*   {mediaDetail.release_date} */}
+            {/* </div> */}
+            <div className="mt-2">
+              <span className="font-semibold">Rating:</span>{" "}
+              {mediaDetail.vote_average} ({mediaDetail.vote_count} votes)
+            </div>
+
+            {/* <div className="mt-2"> */}
+            {/*   <span className="font-semibold">Genres:</span>{" "} */}
+            {/*   {mediaDetail.genre_ids.join(", ")} */}
+            {/* </div> */}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  else if (mediaType === "tv") {
+    const mediaDetail = getTvDetail(parseInt(mediaId));
+    return (
+      <div className="container mx-auto p-4">
+        <div className="max-w-4xl mx-auto ">
+          <img
+            className="aspect-auto object-cover"
+            src={imageBasePath + "/" + mediaDetail.poster_path}
+            alt={mediaDetail.name}
+          />
+          <div className="p-6">
+            <h1 className="text-3xl font-bold mb-2">{mediaDetail.name}</h1>
+            <p className="text-gray-700 text-base line-clamp-3 overflow-hidden">
+              {mediaDetail.overview}
+            </p>
+            {/* <div className="mt-4"> */}
+            {/*   <span className="font-semibold">Release Date:</span>{" "} */}
+            {/*   {mediaDetail.release_date} */}
+            {/* </div> */}
+            <div className="mt-2">
+              <span className="font-semibold">Rating:</span>{" "}
+              {mediaDetail.vote_average} ({mediaDetail.vote_count} votes)
+            </div>
+
+            {/* <div className="mt-2"> */}
+            {/*   <span className="font-semibold">Genres:</span>{" "} */}
+            {/*   {mediaDetail.genre_ids.join(", ")} */}
+            {/* </div> */}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
