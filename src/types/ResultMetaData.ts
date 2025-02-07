@@ -23,4 +23,6 @@ export interface ResultMetaData {
   "vote_average": number,
   "vote_count": number,
 }
-
+export interface ResultMetaDataExtended extends ResultMetaData {
+  logo_path: string
+}
