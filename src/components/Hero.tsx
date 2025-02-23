@@ -7,6 +7,7 @@ import { ResultMetaData, ResultMetaDataExtended } from '@/types/ResultMetaData';
 import { Carousel } from "flowbite-react";
 import HeroSlides from './ui/HeroSlide';
 
+import Link from 'next/link';
 export default async function Hero({ className }: { className?: string }) {
   const topmovies = await getTopMovies() as ResultMetaData[];
   const topMoviesExtended = await Promise.all(
@@ -22,7 +23,9 @@ export default async function Hero({ className }: { className?: string }) {
     <div className="h-96 xl:h-[700px] 2xl:[900px]">
       <Carousel>
         {topMoviesExtended.map((movie: ResultMetaDataExtended) => (
-          <HeroSlides media={movie} key={movie.id} />
+          <Link key={movie.id} href={`/detail/movie/${movie.id}`} >
+            <HeroSlides media={movie} />
+          </Link>
         ))}
       </Carousel>
     </div>
