@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import Navbar from "@/components/Navbar";
 import Logo from "@/components/Logo";
 import Link from "next/link";
@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`bg-black ${istrumentSans.className} antialiased`}
       >
-        <div className="mx-10 mt-10 flex flex-row">
+        <div className="absolute z-10 mx-10 mt-10 flex flex-row">
           <Link href="/">
             <Logo className="text-white" />
           </Link>
