@@ -1,4 +1,5 @@
-import { getMovieDetail, getTvDetail } from "@/lib/db";
+import { getMovieDetail } from "@/lib/api/movies";
+import { getTvDetail } from "@/lib/api/tv";
 import { MovieDetail } from "@/types/MovieDetail";
 import { TVDetail } from "@/types/TVDetail";
 import Link from "next/link";
@@ -12,7 +13,7 @@ export default async function Page({
   const [mediaType, mediaId] = (await params).slug;
   console.log(mediaType, mediaId);
   if (mediaType === "movie") {
-    const mediaDetail: MovieDetail = getMovieDetail(parseInt(mediaId));
+    const mediaDetail: MovieDetail = await getMovieDetail(mediaId);
 
     if (!mediaDetail) {
       return <div>Media not found</div>;
@@ -48,7 +49,7 @@ export default async function Page({
     );
   }
   else if (mediaType === "tv") {
-    const mediaDetail = getTvDetail(parseInt(mediaId));
+    const mediaDetail: TVDetail = await getTvDetail(mediaId);
     return (
       <div className="container mx-auto p-4">
         <div className="max-w-4xl mx-auto ">

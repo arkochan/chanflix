@@ -1,6 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils/cn';
-import { getMovieLogoPath, getTopMovies } from '@/lib/db/get';
+import { getMovieLogoPath, } from '@/lib/api/media'
+import { getTopMovies, } from '@/lib/api/movies'
 import Image from 'next/image';
 import { ResultMetaData, ResultMetaDataExtended } from '@/types/ResultMetaData';
 import { Carousel } from "flowbite-react";
