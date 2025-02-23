@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { ResultMetaData, ResultMetaDataExtended } from '@/types/ResultMetaData';
 import { Carousel } from "flowbite-react";
 import HeroSlides from './ui/HeroSlide';
-
 import Link from 'next/link';
 export default async function Hero({ className }: { className?: string }) {
   const topmovies = await getTopMovies() as ResultMetaData[];
@@ -18,9 +17,8 @@ export default async function Hero({ className }: { className?: string }) {
       };
     })
   );
-
   return (
-    <div className="h-96 xl:h-[700px] 2xl:[900px]">
+    <div className="h-96 md:h-[500px] xl:h-[700px] 2xl:[900px]">
       <Carousel>
         {topMoviesExtended.map((movie: ResultMetaDataExtended) => (
           <Link key={movie.id} href={`/detail/movie/${movie.id}`} >
@@ -28,6 +26,6 @@ export default async function Hero({ className }: { className?: string }) {
           </Link>
         ))}
       </Carousel>
-    </div>
+    </div >
   );
 }
