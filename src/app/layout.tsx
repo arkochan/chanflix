@@ -31,12 +31,12 @@ export default function RootLayout({
       <body
         className={`bg-black ${istrumentSans.className} antialiased`}
       >
-        <div className="absolute z-10 mx-10 mt-10 flex flex-row">
-          <Link href="/">
-            <Logo className="text-white" />
-          </Link>
-          <Navbar className="ml-10  " />
-        </div>
+        {/* <div className="absolute z-10 mx-10 mt-10 flex flex-row"> */}
+        {/*   <Link href="/"> */}
+        {/*     <Logo className="text-white" /> */}
+        {/*   </Link> */}
+        {/*   <Navbar className="ml-10  " /> */}
+        {/* </div> */}
         {children}
       </body>
     </html>
