@@ -4,24 +4,37 @@ import { cn } from '@/lib/utils/cn';
 import { PlaceholdersAndVanishInput } from './ui/placeholders-and-vanish-input';
 import useSearchStore from '@/hooks/store';
 import { ResultMetaData } from '@/types/ResultMetaData';
-import { getSearchResult } from '@/lib/db';
+import { searchMovies } from '@/lib/api/search';
 
-export default function HeroSearch({ className }: { className?: string }) {
+export default function HeroSearch({ className, topMovies }: { className?: string, topMovies: string[] }) {
 
   const [queryString, setQueryString] = useState("");
-  var popular_show_titles = ["Squid Game", "Money Heist", "Stranger Things", "Lupin", "The Witch"];
+  var popular_show_titles = topMovies;
 
   // const searchResults = useSearchStore((state) => state.searchResult)
   const setSearchResults = useSearchStore((state) => state.setSearchResult)
 
   // HACK: 
-  const searchResult = getSearchResult(0);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setQueryString(e.target.value);
   }
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    setSearchResults(searchResult)
+  async function fetchSearchResults(query: string) {
+    try {
+      const response = await fetch(`/api?query=${encodeURIComponent(query)}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const searchResult = await response.json();
+      setSearchResults(searchResult);
+    } catch (error) {
+      console.error('Error fetching search results from local API:', error);
+    }
+  }
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    await fetchSearchResults(queryString);
   }
 
   return (
