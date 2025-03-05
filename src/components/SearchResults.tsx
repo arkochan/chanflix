@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Card from './ui/Card';
 
 
-export default function SearchResults({ className }: { className?: string, SearchResults: string[] }) {
+export default function SearchResults({ className }: { className?: string }) {
   const searchResults = useSearchStore((state) => state.searchResult)
   return (
     <div className={cn("mt-10 flex flex-wrap items-center justify-center gap-8", className)}>
