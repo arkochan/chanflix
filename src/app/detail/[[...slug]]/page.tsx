@@ -1,7 +1,10 @@
+import HeroSlides from "@/components/ui/HeroSlide";
+import { getMovieLogoPath } from "@/lib/api/media";
 import { getMovieDetail } from "@/lib/api/movies";
 import { getTvDetail } from "@/lib/api/tv";
 import { MovieDetail } from "@/types/MovieDetail";
 import { TVDetail } from "@/types/TVDetail";
+import { Play } from "next/font/google";
 import Link from "next/link";
 
 export default async function Page({
@@ -14,37 +17,19 @@ export default async function Page({
   console.log(mediaType, mediaId);
   if (mediaType === "movie") {
     const mediaDetail: MovieDetail = await getMovieDetail(mediaId);
-
+    let mediaDetailExtended = {
+      ...mediaDetail,
+      logo_path: await getMovieLogoPath(mediaDetail.id) as string,
+    }
     if (!mediaDetail) {
       return <div>Media not found</div>;
     }
     return (
-      <div className="container mx-auto p-4">
-        <div className="max-w-4xl mx-auto ">
-          <img
-            className="aspect-auto object-cover"
-            src={imageBasePath + "/" + mediaDetail.poster_path}
-            alt={mediaDetail.title}
-          />
-          <div className="p-6">
-            <h1 className="text-3xl font-bold mb-2">{mediaDetail.title}</h1> <p className="text-gray-700 text-base line-clamp-3 overflow-hidden">
-              {mediaDetail.overview}
-            </p>
-            {/* <div className="mt-4"> */}
-            {/*   <span className="font-semibold">Release Date:</span>{" "} */}
-            {/*   {mediaDetail.release_date} */}
-            {/* </div> */}
-            <div className="mt-2">
-              <span className="font-semibold">Rating:</span>{" "}
-              {mediaDetail.vote_average} ({mediaDetail.vote_count} votes)
-            </div>
+      <div>
+        <HeroSlides media={mediaDetailExtended} />
 
-            {/* <div className="mt-2"> */}
-            {/*   <span className="font-semibold">Genres:</span>{" "} */}
-            {/*   {mediaDetail.genre_ids.join(", ")} */}
-            {/* </div> */}
-          </div>
-        </div>
+        {/* play button */}
+
       </div>
     );
   }
