@@ -1,5 +1,6 @@
 import { ResultMetaData, ResultMetaDataExtended } from "@/types/ResultMetaData";
 import Link from "next/link";
+import Button_WatchNow from "./Button_WatchNow";
 
 export default function HeroSlides({ media }: { media: ResultMetaDataExtended }) {
   // console.log("logo path is ", media.logo_path);
@@ -19,10 +20,7 @@ export default function HeroSlides({ media }: { media: ResultMetaDataExtended })
           <div>
             <div className="text-sm line-clamp-3">{media.overview}</div>
           </div>
-
-          <Link className="bg-slate-200 rounded-3xl px-4 py-2 shadow-current mt-4 text-black " href={`/player/movie/${media.id}`}>
-            Watch Now
-          </Link>
+          <Button_WatchNow mediaId={media.id} />
         </div>
       </div>
     </div>
