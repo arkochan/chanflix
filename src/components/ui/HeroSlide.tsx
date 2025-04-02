@@ -1,8 +1,18 @@
-import { ResultMetaData, ResultMetaDataExtended } from "@/types/ResultMetaData";
+import { ResultMetaData } from "@/types/ResultMetaData";
+
+interface MediaProps {
+  backdrop_path: string;
+  logo_path?: string;
+  title?: string;
+  name?: string;
+  vote_average: number;
+  overview: string;
+  id: number;
+}
 import Link from "next/link";
 import Button_WatchNow from "./Button_WatchNow";
 
-export default function HeroSlides({ media }: { media: ResultMetaDataExtended }) {
+export default function HeroSlides({ media }: { media: MediaProps }) {
   // console.log("logo path is ", media.logo_path);
   return (
     <div className="relative h-screen w-full">
